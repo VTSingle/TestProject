@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {View, Text, FlatList, TouchableOpacity, AsyncStorage} from 'react-native';
+import {View, FlatList, TouchableOpacity, AsyncStorage} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import styles from './style';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import moment from 'moment';
 import {connect} from "react-redux";
-import {green, red} from "../../constants/colors";
+import ShowDate from '../../components/showDate';
+import TransactionBlock from '../../components/transactionBlock';
 
 class MyList extends Component {
 
@@ -31,33 +30,13 @@ class MyList extends Component {
         return (
             <View>
                 {
-                    index === 0 && item.date !== '' ?
-                        <View style={styles.styleDate}>
-                            <Text style={styles.styleText}>{moment(item.date).format('ll')}</Text>
-                        </View> :
-                        list.length === 1 ? <View style={styles.styleDate}>
-                                <Text style={styles.styleText}>{item.date !== '' ? moment(item.date).format('ll') : null}</Text>
-                            </View> :
-                            list[index].date !== list[index-1].date && item.date !== '' ?
-                                <View style={styles.styleDate}>
-                                    <Text style={styles.styleText}>{moment(item.date).format('ll')}</Text>
-                                </View> :
+                    index === 0  ? <ShowDate date = {item.date}/> :
+                        list.length === 1 ? <ShowDate date = {item.date}/> :
+                            list[index].date !== list[index-1].date ? <ShowDate date = {item.date}/> :
                                 null
                 }
                 <TouchableOpacity onPress={() => Actions.EditItem({transaction: item})}>
-                    <View style={styles.sizeBlock}>
-                        <View style={styles.positionElements}>
-                            <View style = {styles.positionElementCenter}>
-                                <Icon name={item.icon} size={30} color={item.selectId === 0 ? green : red}/>
-                            </View>
-                            <View style = {styles.positionElementCenter}>
-                                <Text style={[styles.styleText, {color: item.selectId === 0 ? green : red}]}>{item.title}</Text>
-                            </View>
-                            <View style = {styles.rightText}>
-                                <Text style={[styles.styleRightText, {color: item.selectId === 0 ? green : red}]}>{item.selectId === 0 ? "+ " : "- "} {item.cost} UAH</Text>
-                            </View>
-                        </View>
-                    </View>
+                    <TransactionBlock transaction = {item}/>
                 </TouchableOpacity>
             </View>
         );
