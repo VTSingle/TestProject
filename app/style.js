@@ -1,14 +1,14 @@
-import {StyleSheet, Dimensions} from 'react-native';
-
-const window = Dimensions.get('window');
+import {StyleSheet} from 'react-native';
+import { height} from "./constants/widthAndHeight";
+import {red, grey} from "./constants/colors";
 
 const styles = StyleSheet.create({
     tabBarStyle: {
-        backgroundColor: 'grey',
-        height: window.height * 0.08,
+        backgroundColor: grey,
+        height: height * 0.08,
         zIndex: 1,
         elevation: 10,
-        borderTopColor: 'red',
+        borderTopColor: red,
         borderTopWidth: 0,
         shadowColor: 'rgba(10, 10, 10, 0.4)',
         shadowOpacity: 0.75,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
     safeArea: {
         flex: 1,
-        backgroundColor: 'grey'
+        backgroundColor: grey
     }
 });
 export default styles;
