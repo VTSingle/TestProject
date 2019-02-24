@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, AsyncStorage} from 'react-native';
+import {View} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import SelectCategory from '../../components/selectCategory';
 import ChoseMoney from '../../components/costInput';
@@ -37,7 +37,6 @@ class App extends React.Component {
     sendTransaction = async () => {
         const {state} = this.props;
         const result = await this.props.actions(addItem(Object.assign(this.state, state.selectCategory, {key: Math.random().toString(36)})));
-        await AsyncStorage.setItem('UserTransaction', JSON.stringify(result.payload.payload));
         Actions.MyInfo();
     };
 

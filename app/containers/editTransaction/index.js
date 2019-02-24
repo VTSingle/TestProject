@@ -24,7 +24,7 @@ class App extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {transaction}=this.props;
         this.setState({
             cost: transaction.cost,
@@ -58,19 +58,18 @@ class App extends React.Component {
         const {transaction} = this.props;
         const {selectCategory, date, cost, description}=this.state;
         return (
-            cost !== '' ?
-                <View style={styles.container}>
-                    <View style={styles.topBackground}>
-                        <View style={styles.positionRowElements}>
-                            <SelectCategory selectCategory={selectCategory}/>
-                            <ChoseMoney cost={cost} onChangesValue={this.handleValue}/>
-                        </View>
-                        <Button title={'Save changes'} onButtonPress={this.sendTransaction}/>
+            <View style={styles.container}>
+                <View style={styles.topBackground}>
+                    <View style={styles.positionRowElements}>
+                        <SelectCategory selectCategory={selectCategory}/>
+                        <ChoseMoney cost={cost} onChangesValue={this.handleValue}/>
                     </View>
-                    <Input title = {'Description'} value = {description} onChangesDescription={this.handleDescription}/>
-                    <DatePicker title = {'Select date'} date = {date} onChangesDate={this.handleDate}/>
-                    <DeleteTransaction key_transaction = {transaction.key}/>
-                </View> : null
+                    <Button title={'Save changes'} onButtonPress={this.sendTransaction}/>
+                </View>
+                <Input title = {'Description'} value = {description} onChangesDescription={this.handleDescription}/>
+                <DatePicker title = {'Select date'} date = {date} onChangesDate={this.handleDate}/>
+                <DeleteTransaction key_transaction = {transaction.key}/>
+            </View>
         );
     }
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import {View, FlatList, TouchableOpacity, AsyncStorage} from 'react-native';
+import {View, FlatList, TouchableOpacity, AsyncStorage, AppState} from 'react-native';
 import {Actions} from "react-native-router-flux";
 import styles from './style';
 import {connect} from "react-redux";
 import ShowDate from '../../components/showDate';
 import TransactionBlock from '../../components/transactionBlock';
+import WarnText from '../../components/warnText';
+import {bindActionCreators} from "redux";
+import {addItem} from "../../actions/userActions";
 
 class MyList extends Component {
 
@@ -17,13 +20,28 @@ class MyList extends Component {
 
     sortUserList(){
         const {state} = this.props;
-        AsyncStorage.getItem('UserTransaction').then((value) => console.warn("test async storage ", JSON.parse(value)));
         this.setState({list: state.list.sort((a,b) => new Date(a.date) - new Date(b.date))})
     }
 
     componentDidMount(){
+        AppState.addEventListener('change', this._handleAppStateChange);
         this.sortUserList();
     }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+    }
+
+    _handleAppStateChange = async (nextAppState) => {
+        const {list} = this.state;
+        if (nextAppState === 'active') {
+           const store = await AsyncStorage.getItem('UserTransaction').then((value) => JSON.parse(value));
+           const writeToStore = await this.props.actions(addItem(store));
+           this.sortUserList();
+        } else if(nextAppState === 'inactive'){
+           AsyncStorage.setItem('UserTransaction', JSON.stringify(list));
+        }
+    };
 
     renderItem = ({ item, index }) => {
         const {list} = this.state;
@@ -47,10 +65,14 @@ class MyList extends Component {
         const {list} = this.state;
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={list}
-                    renderItem={this.renderItem}
-                />
+                {list.length === 0 ?
+                    <WarnText warn={'You do not have a transactions'} />
+                    :
+                    <FlatList
+                        data={list}
+                        renderItem={this.renderItem}
+                    />
+                }
             </View>
         );
     }
@@ -58,5 +80,8 @@ class MyList extends Component {
 
 export default connect(state => ({
         state: state
+    }),
+    (dispatch) => ({
+        actions: bindActionCreators(addItem, dispatch)
     })
 )(MyList);
