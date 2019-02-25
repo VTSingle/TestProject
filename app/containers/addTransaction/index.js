@@ -42,21 +42,21 @@ class App extends React.Component {
 
     render() {
         const {state} = this.props;
-        const {cost, date} = this.state;
+        const {cost, date, description} = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.topBackground}>
                     <View style={styles.positionRowElements}>
                         <SelectCategory selectCategory={''}/>
-                        <ChoseMoney cost={''} onChangesValue={this.handleValue}/>
+                        <ChoseMoney cost={cost} onChangesValue={this.handleValue}/>
                     </View>
                     { state.selectCategory.title !== '' && cost !== '' && date !== '' ?
                         <Button title={'Add transaction'} onButtonPress={this.sendTransaction}/>
                         : null
                     }
                 </View>
-                <Input title = {'Description'} value = {''} onChangesDescription={this.handleDescription}/>
-                <DatePicker title = {'Select date'} date = {''} onChangesDate={this.handleDate}/>
+                <Input title = {'Description'} value = {description} onChangesDescription={this.handleDescription}/>
+                <DatePicker title = {'Select date'} date = {date} onChangesDate={this.handleDate}/>
             </View>
         );
     }

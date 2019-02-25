@@ -17,7 +17,7 @@ class selectCategory extends React.Component {
     }
 
     componentDidMount(){
-        const {selectCategory}=this.props;
+        const {selectCategory} = this.props;
         this.setState({selectCategory: selectCategory})
     }
 
@@ -25,16 +25,16 @@ class selectCategory extends React.Component {
         this.setState({selectCategory: props.state.selectCategory});
     }
 
-    pressSelectCategory(){
+    pressSelectCategory = () => {
         this.props.actions(openModal())
-    }
+    };
 
     render() {
         const {selectCategory} = this.state;
         return (
             <View style={styles.positionElements}>
                 <View style={styles.positionAddButton}>
-                    <TouchableOpacity onPress = {() => this.pressSelectCategory()}>
+                    <TouchableOpacity onPress = {this.pressSelectCategory}>
                         <Icon name="plus-circle" size={30} color={green}/>
                     </TouchableOpacity>
                 </View>

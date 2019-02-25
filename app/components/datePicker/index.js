@@ -18,6 +18,10 @@ class Date extends React.Component {
         this.setState({date: date})
     }
 
+    componentWillReceiveProps(props){
+        this.setState({date: props.date})
+    }
+
     handleChangeDate = (date) => {
         this.setState({date: date});
         this.props.onChangesDate(date);

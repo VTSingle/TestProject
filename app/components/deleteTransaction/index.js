@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, AsyncStorage} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Actions} from "react-native-router-flux";
 import styles from './style';
@@ -11,8 +11,10 @@ import {red} from "../../constants/colors";
 class DeleteTransaction extends React.Component {
 
     async pressDelete(){
-        const {key_transaction}=this.props;
+        const {state, key_transaction}=this.props;
         await this.props.actions(deleteItem(key_transaction));
+        const res = await state.list;
+        const set_transactions = await AsyncStorage.setItem('UserTransaction', JSON.stringify(res));
         Actions.MyInfo();
     }
 

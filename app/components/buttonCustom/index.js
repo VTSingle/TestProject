@@ -13,7 +13,7 @@ class ButtonCustom extends React.Component {
         return (
             <Button
                 title={title}
-                onPress={() => this.handlePress()}
+                onPress={this.handlePress}
                 color={green}
             />
         );

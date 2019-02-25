@@ -18,12 +18,12 @@ class MyList extends Component {
         }
     }
 
-    sortUserList(){
+    sortUserList = () => {
         const {state} = this.props;
         this.setState({list: state.list.sort((a,b) => new Date(a.date) - new Date(b.date))})
-    }
+    };
 
-    componentDidMount(){
+    async componentDidMount(){
         AppState.addEventListener('change', this._handleAppStateChange);
         this.sortUserList();
     }
@@ -35,8 +35,8 @@ class MyList extends Component {
     _handleAppStateChange = async (nextAppState) => {
         const {list} = this.state;
         if (nextAppState === 'active') {
-           const store = await AsyncStorage.getItem('UserTransaction').then((value) => JSON.parse(value));
-           const writeToStore = await this.props.actions(addItem(store));
+           const store = await AsyncStorage.getItem('UserTransaction').then((value) => value !== null ? JSON.parse(value) : []);
+           const writeToStore = await this.props.actions(addItem([]));
            this.sortUserList();
         } else if(nextAppState === 'inactive'){
            AsyncStorage.setItem('UserTransaction', JSON.stringify(list));

@@ -2,7 +2,7 @@ import * as types from '../../constants/userConst/index';
 
 
 const userInfoState = {
-    list: [],
+    list: [{icon: 'car', title: 'Car', selectId: 0, cost: '15'}],
     modal: false,
     selectCategory: {icon: '', title: '', selectId: 0}
 };
@@ -17,16 +17,16 @@ const userInfo = (state = userInfoState, action) => {
             };
         case types.DELETEITEM:
             let objIndexDelete = state.list.findIndex((obj => obj.key === action.payload.payload));
-            state.list.splice(objIndexDelete, 1);
             return {
                 ...state,
+                list: [...state.list.slice(0, objIndexDelete), ...state.list.slice(objIndexDelete + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.EDITITEM:
             let objIndexEdit = state.list.findIndex((obj => obj.key === action.payload.key_transaction));
-            Object.assign(state.list[objIndexEdit], action.payload.payload);
             return {
                 ...state,
+                list: [...state.list.slice(0, objIndexEdit), action.payload.payload, ...state.list.slice(objIndexEdit + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.OPENMODAL:

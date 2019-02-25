@@ -17,6 +17,10 @@ class moneyInput extends React.Component {
         this.setState({cost: cost})
     }
 
+    componentWillReceiveProps(props){
+        this.setState({cost: props.cost})
+    }
+
     handleLangChange = (value) => {
         this.setState({cost: value});
         this.props.onChangesValue(value);

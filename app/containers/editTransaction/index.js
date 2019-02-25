@@ -24,7 +24,7 @@ class App extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const {transaction}=this.props;
         this.setState({
             cost: transaction.cost,
@@ -47,16 +47,19 @@ class App extends React.Component {
     };
 
     sendTransaction = async () => {
+        const {cost, description, date, selectCategory} = this.state;
         const {state, transaction} = this.props;
-        state.selectCategory.icon === '' ?
-         this.props.actions(editItem(this.state, transaction.key)) :
-         this.props.actions(editItem(Object.assign(this.state, state.selectCategory), transaction.key));
+
+        const run_one = state.selectCategory.icon === '' ?
+            await this.props.actions(editItem({cost: cost, description: description, date: date, key: transaction.key, icon: selectCategory.icon, title: selectCategory.title, selectId: transaction.selectId}, transaction.key)) :
+            await this.props.actions(editItem({cost: cost, description: description, date: date, icon: state.selectCategory.icon, title: state.selectCategory.title, key: transaction.key, selectId: state.selectCategory.selectId}, transaction.key));
+
         Actions.MyInfo();
     };
 
     render() {
         const {transaction} = this.props;
-        const {selectCategory, date, cost, description}=this.state;
+        const {selectCategory, date, cost, description} = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.topBackground}>

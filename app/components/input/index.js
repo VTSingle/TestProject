@@ -7,30 +7,34 @@ class Input extends React.Component {
     constructor(){
         super();
         this.state = {
-            defaultText: ''
+            description: ''
         }
     }
 
     componentDidMount(){
         const {value}=this.props;
-        this.setState({defaultText: value})
+        this.setState({description: value})
+    }
+
+    componentWillReceiveProps(props){
+        this.setState({description: props.value })
     }
 
     handleLangChange = (description) => {
-        this.setState({defaultText: description});
+        this.setState({description: description});
         this.props.onChangesDescription(description);
     };
 
     render() {
         const { title } = this.props;
-        const { defaultText } = this.state;
+        const { description } = this.state;
         return (
             <View>
                 <Text style={styles.styleText}>{title}</Text>
                 <TextInput
                     style={styles.styleInput}
                     onChangeText={(text) => this.handleLangChange(text)}
-                    value={defaultText}
+                    value={description}
                 />
             </View>
         );
