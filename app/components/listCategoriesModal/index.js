@@ -6,6 +6,7 @@ import styles from './style';
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {bindActionCreators} from "redux";
 import {hideModal} from "../../actions/userActions";
+import {black} from "../../constants/colors";
 
 class listCategoriesModal extends React.Component {
 
@@ -20,7 +21,7 @@ class listCategoriesModal extends React.Component {
         return (
             <TouchableOpacity onPress={() => this.props.actions(hideModal(Object.assign(item, this.state)))}>
                 <View style={styles.styleBlock}>
-                    <Icon name={item.icon} size={30} color="black"/>
+                    <Icon name={item.icon} size={30} color={black}/>
                     <Text>{item.title}</Text>
                 </View>
             </TouchableOpacity>
