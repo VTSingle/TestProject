@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
+import {green} from "../../constants/colors";
 
 class ButtonCustom extends React.Component {
 
@@ -13,7 +14,7 @@ class ButtonCustom extends React.Component {
             <Button
                 title={title}
                 onPress={() => this.handlePress()}
-                color="green"
+                color={green}
             />
         );
     }
