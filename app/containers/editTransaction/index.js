@@ -10,7 +10,7 @@ import DeleteTransaction from '../../components/deleteTransaction';
 import styles from './style';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
-import {editItem} from "../../actions/userActions";
+import {editItem, updateSelectCategory} from "../../actions/userActions";
 
 class App extends React.Component {
 
@@ -26,6 +26,7 @@ class App extends React.Component {
 
     componentDidMount() {
         const {transaction}=this.props;
+        this.props.actionsUpdateCategory(updateSelectCategory({icon: transaction.icon, title: transaction.title, selectId: transaction.selectId}));
         this.setState({
             cost: transaction.cost,
             description: transaction.description,
@@ -81,6 +82,7 @@ export default connect(state => ({
         state: state
     }),
     (dispatch) => ({
-        actions: bindActionCreators(editItem, dispatch)
+        actions: bindActionCreators(editItem, dispatch),
+        actionsUpdateCategory: bindActionCreators(updateSelectCategory, dispatch)
     })
 )(App);

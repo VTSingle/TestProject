@@ -35,3 +35,10 @@ export function hideModal(data) {
         payload: data
     };
 }
+
+export function updateSelectCategory(data) {
+    return {
+        type: types.UPDATESELECTCATEGORY,
+        payload: data
+    };
+}

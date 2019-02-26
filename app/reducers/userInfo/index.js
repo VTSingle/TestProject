@@ -1,8 +1,7 @@
 import * as types from '../../constants/userConst/index';
 
-
 const userInfoState = {
-    list: [{icon: 'car', title: 'Car', selectId: 0, cost: '15'}],
+    list: [],
     modal: false,
     selectCategory: {icon: '', title: '', selectId: 0}
 };
@@ -28,6 +27,11 @@ const userInfo = (state = userInfoState, action) => {
                 ...state,
                 list: [...state.list.slice(0, objIndexEdit), action.payload.payload, ...state.list.slice(objIndexEdit + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
+            };
+        case types.UPDATESELECTCATEGORY:
+            return {
+                ...state,
+                selectCategory: action.payload.payload
             };
         case types.OPENMODAL:
             return {
