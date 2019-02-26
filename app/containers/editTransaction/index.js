@@ -31,7 +31,8 @@ class App extends React.Component {
             cost: transaction.cost,
             description: transaction.description,
             date: transaction.date,
-            selectCategory: {icon: transaction.icon, title: transaction.title}
+            selectCategory: {icon: transaction.icon, title: transaction.title},
+            selectId: transaction.selectId
         })
     }
 
@@ -54,12 +55,12 @@ class App extends React.Component {
     };
 
     sendTransaction = async () => {
-        const {cost, description, date, selectCategory} = this.state;
+        const {selectCategory} = this.state;
         const {state, transaction} = this.props;
 
         const run_one = state.selectCategory.icon === '' ?
-            await this.props.actionsUpdateItem(editItem({cost: cost, description: description, date: date, key: transaction.key, icon: selectCategory.icon, title: selectCategory.title, selectId: transaction.selectId}, transaction.key)) :
-            await this.props.actionsUpdateItem(editItem({cost: cost, description: description, date: date, icon: state.selectCategory.icon, title: state.selectCategory.title, key: transaction.key, selectId: state.selectCategory.selectId}, transaction.key));
+            await this.props.actionsUpdateItem(editItem({...this.state, ...selectCategory}, transaction.key)) :
+            await this.props.actionsUpdateItem(editItem({...this.state, ...state.selectCategory}, transaction.key));
 
         Actions.MyInfo();
     };
