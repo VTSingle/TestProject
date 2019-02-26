@@ -1,6 +1,5 @@
 import * as types from '../../constants/userConst/index';
 
-
 const userInfoState = {
     list: [],
     modal: false,

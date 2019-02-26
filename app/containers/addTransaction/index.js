@@ -23,15 +23,15 @@ class App extends React.Component {
     }
 
     handleValue = (cost) => {
-        this.setState({cost: cost})
+        this.setState({cost})
     };
 
     handleDescription = (description) => {
-        this.setState({description: description})
+        this.setState({description})
     };
 
     handleDate = (date) => {
-        this.setState({date: date})
+        this.setState({date})
     };
 
     sendTransaction = async () => {

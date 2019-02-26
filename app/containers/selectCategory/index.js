@@ -18,11 +18,11 @@ class selectCategory extends React.Component {
 
     componentDidMount(){
         const {selectCategory} = this.props;
-        this.setState({selectCategory: selectCategory})
+        this.setState({selectCategory})
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({selectCategory: props.state.selectCategory});
+    static getDerivedStateFromProps(nextProps, prevState) {
+       return {...prevState, selectCategory: nextProps.state.selectCategory}
     }
 
     pressSelectCategory = () => {

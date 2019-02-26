@@ -33,13 +33,13 @@ class MyList extends Component {
     }
 
     _handleAppStateChange = async (nextAppState) => {
-        const {list} = this.state;
+        const {state} = this.props;
         if (nextAppState === 'active') {
            const store = await AsyncStorage.getItem('UserTransaction').then((value) => value !== null ? JSON.parse(value) : []);
-           const writeToStore = await this.props.actions(addItem([]));
+           const writeToStore = await this.props.actions(addItem(store));
            this.sortUserList();
-        } else if(nextAppState === 'inactive'){
-           AsyncStorage.setItem('UserTransaction', JSON.stringify(list));
+        } else if(nextAppState === 'background'){
+           AsyncStorage.setItem('UserTransaction', JSON.stringify(state.list));
         }
     };
 
@@ -65,13 +65,14 @@ class MyList extends Component {
         const {list} = this.state;
         return (
             <View style={styles.container}>
-                {list.length === 0 ?
-                    <WarnText warn={'You do not have a transactions'} />
-                    :
-                    <FlatList
-                        data={list}
-                        renderItem={this.renderItem}
-                    />
+                {
+                    list.length === 0 ?
+                        <WarnText warn={'You do not have a transactions'} />
+                        :
+                        <FlatList
+                            data={list}
+                            renderItem={this.renderItem}
+                        />
                 }
             </View>
         );
