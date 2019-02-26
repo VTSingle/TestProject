@@ -1,8 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Actions} from "react-native-router-flux";
-import SelectCategory from '../../components/selectCategory';
-import ChoseMoney from '../../components/costInput';
+import SelectCategory from '../selectCategory';
+import ChooseMoney from '../../components/costInput';
 import Input from '../../components/input';
 import DatePicker from '../../components/datePicker';
 import Button from '../../components/buttonCustom';
@@ -48,10 +48,11 @@ class App extends React.Component {
                 <View style={styles.topBackground}>
                     <View style={styles.positionRowElements}>
                         <SelectCategory selectCategory={''}/>
-                        <ChoseMoney cost={cost} onChangesValue={this.handleValue}/>
+                        <ChooseMoney cost={cost} onChangesValue={this.handleValue}/>
                     </View>
-                    { state.selectCategory.title !== '' && cost !== '' && date !== '' ?
-                        <Button title={'Add transaction'} onButtonPress={this.sendTransaction}/>
+                    {
+                        state.selectCategory.title !== '' && cost !== '' && date !== '' ?
+                            <Button title={'Add transaction'} onButtonPress={this.sendTransaction}/>
                         : null
                     }
                 </View>

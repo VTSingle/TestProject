@@ -6,30 +6,12 @@ import {green} from "../../constants/colors";
 
 class Date extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            date:''
-        }
-    }
-
-    componentDidMount(){
-        const {date}=this.props;
-        this.setState({date: date})
-    }
-
-    componentWillReceiveProps(props){
-        this.setState({date: props.date})
-    }
-
     handleChangeDate = (date) => {
-        this.setState({date: date});
         this.props.onChangesDate(date);
     };
 
     render() {
-        const { title } = this.props;
-        const { date } = this.state;
+        const { title, date } = this.props;
         return (
             <View>
                 <Text style={styles.styleText}>{title}</Text>

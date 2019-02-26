@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View, Modal, FlatList, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
-import {categories_income, categories_consumption} from "../../constants/categories";
+import {categories_income, categories_consumption} from "../../constants/categories/index";
 import styles from './style';
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {bindActionCreators} from "redux";
-import {hideModal} from "../../actions/userActions";
-import {black} from "../../constants/colors";
+import {hideModal} from "../../actions/userActions/index";
+import {black} from "../../constants/colors/index";
 
 class listCategoriesModal extends React.Component {
 

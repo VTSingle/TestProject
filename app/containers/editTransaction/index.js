@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Actions} from "react-native-router-flux";
-import SelectCategory from '../../components/selectCategory';
+import SelectCategory from '../selectCategory';
 import ChoseMoney from '../../components/costInput';
 import Input from '../../components/input';
 import DatePicker from '../../components/datePicker';
@@ -10,7 +10,7 @@ import DeleteTransaction from '../../components/deleteTransaction';
 import styles from './style';
 import { connect } from 'react-redux';
 import {bindActionCreators} from "redux";
-import {editItem, updateSelectCategory} from "../../actions/userActions";
+import {editItem, updateSelectCategory, deleteItem} from "../../actions/userActions";
 
 class App extends React.Component {
 
@@ -47,19 +47,24 @@ class App extends React.Component {
         this.setState({date: date})
     };
 
+    handleDelete = () => {
+        const {transaction} = this.props;
+        this.props.actionsDeleteItem(deleteItem(transaction.key));
+        Actions.MyInfo();
+    };
+
     sendTransaction = async () => {
         const {cost, description, date, selectCategory} = this.state;
         const {state, transaction} = this.props;
 
         const run_one = state.selectCategory.icon === '' ?
-            await this.props.actions(editItem({cost: cost, description: description, date: date, key: transaction.key, icon: selectCategory.icon, title: selectCategory.title, selectId: transaction.selectId}, transaction.key)) :
-            await this.props.actions(editItem({cost: cost, description: description, date: date, icon: state.selectCategory.icon, title: state.selectCategory.title, key: transaction.key, selectId: state.selectCategory.selectId}, transaction.key));
+            await this.props.actionsUpdateItem(editItem({cost: cost, description: description, date: date, key: transaction.key, icon: selectCategory.icon, title: selectCategory.title, selectId: transaction.selectId}, transaction.key)) :
+            await this.props.actionsUpdateItem(editItem({cost: cost, description: description, date: date, icon: state.selectCategory.icon, title: state.selectCategory.title, key: transaction.key, selectId: state.selectCategory.selectId}, transaction.key));
 
         Actions.MyInfo();
     };
 
     render() {
-        const {transaction} = this.props;
         const {selectCategory, date, cost, description} = this.state;
         return (
             <View style={styles.container}>
@@ -70,9 +75,9 @@ class App extends React.Component {
                     </View>
                     <Button title={'Save changes'} onButtonPress={this.sendTransaction}/>
                 </View>
-                <Input title = {'Description'} value = {description} onChangesDescription={this.handleDescription}/>
+                <Input title = {'Description'} description = {description} onChangesDescription={this.handleDescription}/>
                 <DatePicker title = {'Select date'} date = {date} onChangesDate={this.handleDate}/>
-                <DeleteTransaction key_transaction = {transaction.key}/>
+                <DeleteTransaction title = {'Delete Transaction'} onPressDelete={this.handleDelete}/>
             </View>
         );
     }
@@ -82,7 +87,8 @@ export default connect(state => ({
         state: state
     }),
     (dispatch) => ({
-        actions: bindActionCreators(editItem, dispatch),
-        actionsUpdateCategory: bindActionCreators(updateSelectCategory, dispatch)
+        actionsUpdateItem: bindActionCreators(editItem, dispatch),
+        actionsUpdateCategory: bindActionCreators(updateSelectCategory, dispatch),
+        actionsDeleteItem: bindActionCreators(deleteItem, dispatch)
     })
 )(App);

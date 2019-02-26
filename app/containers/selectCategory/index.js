@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './style';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { openModal } from '../../actions/userActions';
-import {green} from "../../constants/colors";
+import { openModal } from '../../actions/userActions/index';
+import {green} from "../../constants/colors/index";
 
 class selectCategory extends React.Component {
 

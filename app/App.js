@@ -8,7 +8,7 @@ import { createStore } from 'redux';
 import MyInfo from './containers/myTransaction';
 import AddInfo from './containers/addTransaction';
 import EditItem from './containers/editTransaction';
-import ListModal from './components/listCategoriesModal';
+import ListModal from './containers/listCategoriesModal';
 import {iconList, iconAdd} from "./constants/tabIcon";
 import coreReducer from './reducers/userInfo';
 

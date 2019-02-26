@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {width} from "../../constants/widthAndHeight";
-import {green} from "../../constants/colors";
+import {width} from "../../constants/widthAndHeight/index";
+import {green} from "../../constants/colors/index";
 
 const styles = StyleSheet.create({
     positionAddButton: {

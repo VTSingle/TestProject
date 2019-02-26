@@ -4,30 +4,12 @@ import styles from './style';
 
 class moneyInput extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            currency: 'UAH',
-            cost: ''
-        }
-    }
-
-    componentDidMount(){
-        const {cost}=this.props;
-        this.setState({cost: cost})
-    }
-
-    componentWillReceiveProps(props){
-        this.setState({cost: props.cost})
-    }
-
     handleLangChange = (value) => {
-        this.setState({cost: value});
         this.props.onChangesValue(value);
     };
 
     render() {
-        const { currency, cost } = this.state;
+        const { cost } = this.props;
         return (
             <View style={styles.positionElements}>
                 <View style={styles.positionAddButton}>
@@ -39,7 +21,7 @@ class moneyInput extends React.Component {
                     />
                 </View>
                 <View>
-                    <Text style={styles.styleText}>{currency}</Text>
+                    <Text style={styles.styleText}>UAH</Text>
                 </View>
             </View>
         );
