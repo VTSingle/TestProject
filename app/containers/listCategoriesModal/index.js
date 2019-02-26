@@ -28,9 +28,13 @@ class listCategoriesModal extends React.Component {
         );
     };
 
-    select(id){
-        this.setState({selectId: id})
-    }
+    selectIncome = () => {
+        this.setState({selectId: 0})
+    };
+
+    selectCost = () => {
+        this.setState({selectId: 1})
+    };
 
     render() {
         const {state} = this.props;
@@ -44,10 +48,10 @@ class listCategoriesModal extends React.Component {
                 <View style={styles.modalStyle}>
                     <View style={styles.content}>
                         <View style={styles.rowText}>
-                            <TouchableOpacity onPress = {() => this.select(0)}>
+                            <TouchableOpacity onPress = {this.selectIncome}>
                                 <Text style={selectId === 0 ? styles.textSelect : styles.textDefault}>Income</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress = {() => this.select(1)}>
+                            <TouchableOpacity onPress = {this.selectCost}>
                                 <Text style={selectId === 1 ? styles.textSelect : styles.textDefault}>Costs</Text>
                             </TouchableOpacity>
                         </View>
