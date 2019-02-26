@@ -23,7 +23,7 @@ class MyList extends Component {
         this.setState({list: state.list.sort((a,b) => new Date(a.date) - new Date(b.date))})
     };
 
-    async componentDidMount(){
+    componentDidMount(){
         AppState.addEventListener('change', this._handleAppStateChange);
         this.sortUserList();
     }
