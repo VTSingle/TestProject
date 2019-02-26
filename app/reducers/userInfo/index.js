@@ -11,18 +11,18 @@ const userInfo = (state = userInfoState, action) => {
         case types.ADDITEM:
             return {
                 ...state,
-                list: state.list.concat(action.payload.payload),
+                list: [...state.list, action.payload.payload],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.DELETEITEM:
-            let objIndexDelete = state.list.findIndex((obj => obj.key === action.payload.payload));
+            const objIndexDelete = state.list.findIndex((obj => obj.key === action.payload.payload));
             return {
                 ...state,
                 list: [...state.list.slice(0, objIndexDelete), ...state.list.slice(objIndexDelete + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.EDITITEM:
-            let objIndexEdit = state.list.findIndex((obj => obj.key === action.payload.key_transaction));
+            const objIndexEdit = state.list.findIndex((obj => obj.key === action.payload.key_transaction));
             return {
                 ...state,
                 list: [...state.list.slice(0, objIndexEdit), action.payload.payload, ...state.list.slice(objIndexEdit + 1)],
