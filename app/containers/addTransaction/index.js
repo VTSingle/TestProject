@@ -36,7 +36,7 @@ class App extends React.Component {
 
     sendTransaction = async () => {
         const {state} = this.props;
-        const result = await this.props.actions(addItem(Object.assign(this.state, state.selectCategory, {key: Math.random().toString(36)})));
+        const result = await this.props.actions(addItem({...this.state, ...state.selectCategory, ...{key: Math.random().toString(36)}}));
         Actions.MyInfo();
     };
 

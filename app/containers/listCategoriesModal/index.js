@@ -19,7 +19,7 @@ class listCategoriesModal extends React.Component {
 
     renderItem = ({ item }) => {
         return (
-            <TouchableOpacity onPress={() => this.props.actions(hideModal(Object.assign(item, this.state)))}>
+            <TouchableOpacity onPress={() => this.props.actions(hideModal({...item, ...this.state}))}>
                 <View style={styles.styleBlock}>
                     <Icon name={item.icon} size={30} color={black}/>
                     <Text>{item.title}</Text>
