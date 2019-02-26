@@ -20,7 +20,8 @@ class App extends React.Component {
             cost: '',
             description: '',
             date: '',
-            selectCategory: {}
+            selectCategory: {},
+            selectId: 0
         }
     }
 
