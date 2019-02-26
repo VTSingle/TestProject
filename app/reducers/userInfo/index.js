@@ -6,32 +6,37 @@ const userInfoState = {
     selectCategory: {icon: '', title: '', selectId: 0}
 };
 
-const userInfo = (state = userInfoState, action) => {
-    switch (action.type) {
+const userInfo = (state = userInfoState, {type, payload}) => {
+    switch (type) {
         case types.ADDITEM:
             return {
                 ...state,
-                list: [...state.list, action.payload.payload],
+                list: [...state.list, payload.payload],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.DELETEITEM:
-            const objIndexDelete = state.list.findIndex((obj => obj.key === action.payload.payload));
+            const objIndexDelete = state.list.findIndex((obj => obj.key === payload.payload));
             return {
                 ...state,
                 list: [...state.list.slice(0, objIndexDelete), ...state.list.slice(objIndexDelete + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
             };
         case types.EDITITEM:
-            const objIndexEdit = state.list.findIndex((obj => obj.key === action.payload.key_transaction));
+            const objIndexEdit = state.list.findIndex((obj => obj.key === payload.key_transaction));
             return {
                 ...state,
-                list: [...state.list.slice(0, objIndexEdit), action.payload.payload, ...state.list.slice(objIndexEdit + 1)],
+                list: [...state.list.slice(0, objIndexEdit), payload.payload, ...state.list.slice(objIndexEdit + 1)],
                 selectCategory: {icon: '', title: '', selectId: 0}
+            };
+        case types.UPDATELIST:
+            return {
+                ...state,
+                list: payload.payload
             };
         case types.UPDATESELECTCATEGORY:
             return {
                 ...state,
-                selectCategory: action.payload.payload
+                selectCategory: payload.payload
             };
         case types.OPENMODAL:
             return {
@@ -42,7 +47,7 @@ const userInfo = (state = userInfoState, action) => {
             return {
                 ...state,
                 modal: false,
-                selectCategory: action.payload.payload
+                selectCategory: payload.payload
             };
         default:
             return state

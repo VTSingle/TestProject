@@ -1,4 +1,3 @@
-
 import * as types from '../../constants/userConst/index';
 
 export function addItem(data) {
@@ -39,6 +38,13 @@ export function hideModal(data) {
 export function updateSelectCategory(data) {
     return {
         type: types.UPDATESELECTCATEGORY,
+        payload: data
+    };
+}
+
+export function updateList(data) {
+    return {
+        type: types.UPDATELIST,
         payload: data
     };
 }

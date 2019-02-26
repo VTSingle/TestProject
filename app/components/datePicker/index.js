@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import styles from './style';
 import {green} from "../../constants/colors";
@@ -11,7 +11,7 @@ class Date extends React.Component {
     };
 
     render() {
-        const { title, date } = this.props;
+        const {title, date} = this.props;
         return (
             <View>
                 <Text style={styles.styleText}>{title}</Text>
@@ -23,7 +23,7 @@ class Date extends React.Component {
                     format="YYYY-MM-DD"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
-                    showIcon = {false}
+                    showIcon={false}
                     customStyles={{
                         dateInput: {
                             borderWidth: 0,

@@ -1,4 +1,4 @@
-import { StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {width, height} from "../../constants/widthAndHeight/index";
 import {green, background, black} from "../../constants/colors/index";
 
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         zIndex: 1,
         elevation: 3,
         shadowColor: black,
-        shadowOffset: { height: 0, width: 0 }
+        shadowOffset: {height: 0, width: 0}
     },
     rowText: {
         padding: 10,

@@ -1,28 +1,29 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import styles from './style';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { openModal } from '../../actions/userActions/index';
+import {openModal} from '../../actions/userActions/index';
 import {green} from "../../constants/colors/index";
 
 class selectCategory extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             selectCategory: {}
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const {selectCategory} = this.props;
         this.setState({selectCategory})
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-       return {...prevState, selectCategory: nextProps.state.selectCategory}
+        return {...prevState, selectCategory: nextProps.state.selectCategory}
     }
 
     pressSelectCategory = () => {
@@ -34,7 +35,7 @@ class selectCategory extends React.Component {
         return (
             <View style={styles.positionElements}>
                 <View style={styles.positionAddButton}>
-                    <TouchableOpacity onPress = {this.pressSelectCategory}>
+                    <TouchableOpacity onPress={this.pressSelectCategory}>
                         <Icon name="plus-circle" size={30} color={green}/>
                     </TouchableOpacity>
                 </View>
@@ -46,9 +47,7 @@ class selectCategory extends React.Component {
     }
 }
 
-export default connect(state => ({
-        state: state
-    }),
+export default connect(state => ({state}),
     (dispatch) => ({
         actions: bindActionCreators(openModal, dispatch)
     })

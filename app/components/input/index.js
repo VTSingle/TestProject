@@ -9,7 +9,7 @@ class Input extends React.Component {
     };
 
     render() {
-        const { title, description } = this.props;
+        const {title, description} = this.props;
         return (
             <View>
                 <Text style={styles.styleText}>{title}</Text>

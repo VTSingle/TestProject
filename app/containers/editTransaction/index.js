@@ -1,6 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Actions} from "react-native-router-flux";
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
+
 import SelectCategory from '../selectCategory';
 import ChoseMoney from '../../components/costInput';
 import Input from '../../components/input';
@@ -8,26 +11,29 @@ import DatePicker from '../../components/datePicker';
 import Button from '../../components/buttonCustom';
 import DeleteTransaction from '../../components/deleteTransaction';
 import styles from './style';
-import { connect } from 'react-redux';
-import {bindActionCreators} from "redux";
 import {editItem, updateSelectCategory, deleteItem} from "../../actions/userActions";
 
 class App extends React.Component {
 
-    constructor(){
-        super();
-        this.state = {
-            cost: '',
-            description: '',
-            date: '',
-            selectCategory: {},
-            selectId: 0
-        }
-    }
+    state = {
+        cost: '',
+        description: '',
+        date: '',
+        selectCategory: {},
+        selectId: 0
+    };
 
     componentDidMount() {
-        const {transaction}=this.props;
-        this.props.actionsUpdateCategory(updateSelectCategory({icon: transaction.icon, title: transaction.title, selectId: transaction.selectId}));
+        const {transaction} = this.props;
+        this.props.actionsUpdateCategory(updateSelectCategory({
+            icon: transaction.icon,
+            title: transaction.title,
+            selectId: transaction.selectId
+        }));
+        this.setInitialState(transaction);
+    }
+
+    setInitialState = (transaction) => {
         this.setState({
             cost: transaction.cost,
             description: transaction.description,
@@ -35,7 +41,7 @@ class App extends React.Component {
             selectCategory: {icon: transaction.icon, title: transaction.title},
             selectId: transaction.selectId
         })
-    }
+    };
 
     handleValue = (cost) => {
         this.setState({cost})
@@ -77,17 +83,15 @@ class App extends React.Component {
                     </View>
                     <Button title={'Save changes'} onButtonPress={this.sendTransaction}/>
                 </View>
-                <Input title = {'Description'} description = {description} onChangesDescription={this.handleDescription}/>
-                <DatePicker title = {'Select date'} date = {date} onChangesDate={this.handleDate}/>
-                <DeleteTransaction title = {'Delete Transaction'} onPressDelete={this.handleDelete}/>
+                <Input title={'Description'} description={description} onChangesDescription={this.handleDescription}/>
+                <DatePicker title={'Select date'} date={date} onChangesDate={this.handleDate}/>
+                <DeleteTransaction title={'Delete Transaction'} onPressDelete={this.handleDelete}/>
             </View>
         );
     }
 }
 
-export default connect(state => ({
-        state: state
-    }),
+export default connect(state => ({state}),
     (dispatch) => ({
         actionsUpdateItem: bindActionCreators(editItem, dispatch),
         actionsUpdateCategory: bindActionCreators(updateSelectCategory, dispatch),

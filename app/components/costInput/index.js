@@ -9,14 +9,14 @@ class moneyInput extends React.Component {
     };
 
     render() {
-        const { cost } = this.props;
+        const {cost} = this.props;
         return (
             <View style={styles.positionElements}>
                 <View style={styles.positionAddButton}>
                     <TextInput
                         style={styles.styleInput}
                         onChangeText={(text) => this.handleLangChange(text)}
-                        keyboardType = {'numeric'}
+                        keyboardType={'numeric'}
                         value={cost}
                     />
                 </View>

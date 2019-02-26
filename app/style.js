@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { height} from "./constants/widthAndHeight";
+import {height} from "./constants/widthAndHeight";
 import {red, grey} from "./constants/colors";
 
 const styles = StyleSheet.create({
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         shadowColor: 'rgba(10, 10, 10, 0.4)',
         shadowOpacity: 0.75,
         shadowRadius: 1,
-        shadowOffset: { height: 0, width: 0 },
+        shadowOffset: {height: 0, width: 0},
     },
 
     safeArea: {

@@ -1,23 +1,24 @@
 import React from 'react';
 import {Text, View, Modal, FlatList, TouchableOpacity} from 'react-native';
-import { connect } from 'react-redux';
-import {categories_income, categories_consumption} from "../../constants/categories/index";
-import styles from './style';
+import {connect} from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {bindActionCreators} from "redux";
+
+import {categories_income, categories_consumption} from "../../constants/categories/index";
+import styles from './style';
 import {hideModal} from "../../actions/userActions/index";
 import {black} from "../../constants/colors/index";
 
 class listCategoriesModal extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             selectId: 0
         }
     }
 
-    renderItem = ({ item }) => {
+    renderItem = ({item}) => {
         return (
             <TouchableOpacity onPress={() => this.props.actions(hideModal({...item, ...this.state}))}>
                 <View style={styles.styleBlock}>
@@ -48,10 +49,10 @@ class listCategoriesModal extends React.Component {
                 <View style={styles.modalStyle}>
                     <View style={styles.content}>
                         <View style={styles.rowText}>
-                            <TouchableOpacity onPress = {this.selectIncome}>
+                            <TouchableOpacity onPress={this.selectIncome}>
                                 <Text style={selectId === 0 ? styles.textSelect : styles.textDefault}>Income</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress = {this.selectCost}>
+                            <TouchableOpacity onPress={this.selectCost}>
                                 <Text style={selectId === 1 ? styles.textSelect : styles.textDefault}>Costs</Text>
                             </TouchableOpacity>
                         </View>
@@ -68,9 +69,7 @@ class listCategoriesModal extends React.Component {
     }
 }
 
-export default connect(state => ({
-        state: state
-    }),
+export default connect(state => ({state}),
     (dispatch) => ({
         actions: bindActionCreators(hideModal, dispatch)
     })

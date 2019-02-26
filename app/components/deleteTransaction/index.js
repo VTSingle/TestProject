@@ -13,8 +13,8 @@ class DeleteTransaction extends React.Component {
     render() {
         const {title} = this.props;
         return (
-            <View  style={styles.positionElements}>
-                <TouchableOpacity onPress = {this.pressDelete}>
+            <View style={styles.positionElements}>
+                <TouchableOpacity onPress={this.pressDelete}>
                     <View style={styles.rowElements}>
                         <View style={styles.positionAddButton}>
                             <Icon name="trash-alt" size={30} color={red}/>
