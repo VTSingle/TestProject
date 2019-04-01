@@ -47,13 +47,12 @@ class MyList extends Component {
         return (
             <View>
                 {
-                    index === 0 ? <ShowDate date={item.date}/> :
-                        list.length === 1 ? <ShowDate date={item.date}/> :
-                            list[index].date !== list[index - 1].date ? <ShowDate date={item.date}/> :
-                                null
+                    index === 0 || list.length === 1 ? <ShowDate date={item.date}/> :
+                        list[index].date !== list[index - 1].date ? <ShowDate date={item.date}/> :
+                            null
                 }
                 <TouchableOpacity onPress={() => Actions.EditItem({transaction: item})}>
-                    <TransactionBlock transaction={item}/>
+                    <TransactionBlock {...item}/>
                 </TouchableOpacity>
             </View>
         );

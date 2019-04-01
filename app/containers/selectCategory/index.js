@@ -10,12 +10,9 @@ import {green} from "../../constants/colors/index";
 
 class selectCategory extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            selectCategory: {}
-        }
-    }
+    state = {
+        selectCategory: {}
+    };
 
     componentDidMount() {
         const {selectCategory} = this.props;

@@ -11,12 +11,9 @@ import {black} from "../../constants/colors/index";
 
 class listCategoriesModal extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            selectId: 0
-        }
-    }
+    state = {
+        selectId: 0
+    };
 
     renderItem = ({item}) => {
         return (

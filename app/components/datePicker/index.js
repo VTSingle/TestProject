@@ -33,7 +33,7 @@ class Date extends React.Component {
                             borderBottomColor: green
                         }
                     }}
-                    onDateChange={(date) => this.handleChangeDate(date)}
+                    onDateChange={this.handleChangeDate}
                 />
             </View>
         );
